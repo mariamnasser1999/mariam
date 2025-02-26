@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="main_blog_details">
-                        <img class="img-fluid" src="img/blog/blog4.png" alt="">
+                        <img class="img-fluid" src="{{ asset('assets') }}}/img/blog/blog4.png" alt="">
                         <a href="#">
                             <h4>Cartridge Is Better Than Ever <br /> A Discount Toner</h4>
                         </a>
@@ -25,7 +25,8 @@
                                         <p>12 Dec, 2017 11:21 am</p>
                                     </div>
                                     <div class="d-flex">
-                                        <img width="42" height="42" src="img/avatar.png" alt="">
+                                        <img width="42" height="42" src="{{ asset('') }}img/avatar.png"
+                                            alt="">
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +53,7 @@
                             <div class="single-comment justify-content-between d-flex">
                                 <div class="user justify-content-between d-flex">
                                     <div class="thumb">
-                                        <img src="img/avatar.png" width="50px">
+                                        <img src="{{ asset('assets') }}img/avatar.png" width="50px">
                                     </div>
                                     <div class="desc">
                                         <h5><a href="#">Emilly Blunt</a></h5>
@@ -68,7 +69,7 @@
                             <div class="single-comment justify-content-between d-flex">
                                 <div class="user justify-content-between d-flex">
                                     <div class="thumb">
-                                        <img src="img/avatar.png" width="50px">
+                                        <img src="{{ asset('assets') }}img/avatar.png" width="50px">
                                     </div>
                                     <div class="desc">
                                         <h5><a href="#">Maria Luna</a></h5>
@@ -84,7 +85,7 @@
                             <div class="single-comment justify-content-between d-flex">
                                 <div class="user justify-content-between d-flex">
                                     <div class="thumb">
-                                        <img src="img/avatar.png" width="50px">
+                                        <img src="{{ asset('assets') }}img/avatar.png" width="50px">
                                     </div>
                                     <div class="desc">
                                         <h5><a href="#">Ina Hayes</a></h5>
@@ -126,7 +127,7 @@
                 </div>
                 @include('Theme.partials.sidebar')
 
-                
+
 
             </div>
     </section>
