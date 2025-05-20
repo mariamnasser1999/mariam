@@ -1,7 +1,14 @@
+    {{-- @php
+        $headerCategories = App\Models\Category::all();
+    @endphp
+
+ --}}
+
+
+
     <!--================Header Menu Area =================-->
 
     <header class="header_area">
-        
         <div class="main_menu">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container box_1620">
@@ -21,43 +28,56 @@
                             <li class="nav-item @yield('home-active')"><a class="nav-link"
                                     href="{{ route('Theme.index') }}">Home</a>
                             </li>
-                            <li class="nav-item @yield('category-active') dropdown">
+                            <li class="nav-item submenu @yield('category-active') dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
                                     aria-haspopup="true" aria-expanded="false">Categories</a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item"><a class="nav-link"
-                                            href="{{ route('Theme.category') }}">Food</a></li>
-                                    <li class="nav-item"><a class="nav-link"
-                                            href="{{ route('Theme.category') }}">Bussiness</a></li>
-                                    <li class="nav-item"><a class="nav-link"
-                                            href="{{ route('Theme.category') }}">Travel</a></li>
+                                    @foreach ($cateogries as $category)
+                                        <li class="nav-item"><a class="nav-link"
+                                                href="{{ route('Theme.category', ['id' => $category->id]) }}">{{ $category->name }}</a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </li>
-                            <li class="nav-item @yield('contact-active')"><a class="nav-link"
-                                    href="{{ route('Theme.contact') }}">Contact</a>
-                            </li>
 
-                            <li class="nav-item @yield('blog-active')"><a class="nav-link"
-                                    href="{{ route('Theme.blog') }}">blog</a>
-                            </li>
+
+                            <l class="nav-item @yield('contact-active')"><a class="nav-link"
+                                    href="{{ route('Theme.contact') }}">Contact</a>
+                            </l i>
 
                         </ul>
-
-                        <!-- Add new blog -->
-                        <a href="{{ route('Theme.login') }}" class="btn btn-sm btn-primary mr-2">login</a>
-                        <!-- End - Add new blog -->
-
+                        @if (Auth::check())
+                            <a href="{{ route('blogs.create') }}" class="btn btn-sm btn-primary mr-2">add new</a>
+                        @endif
                         <ul class="nav navbar-nav navbar-right navbar-social">
-                            <a href="{{ route('Theme.register') }}" class="btn btn-sm btn-warning">Register </a>
+                            @if (!Auth::check())
+                                <a href="{{ route('register') }}" class=" btn btn-sm btn-warning">Register/login
+                                </a>
+                            @else
+                                <li class="nav-item submenu dropdown" class="p-3">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
+                                        role="button" aria-haspopup="true"
+                                        aria-expanded="false">{{ Auth::user()->name }}</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item"><a class="nav-link" href="{{ route('blogs.my-blogs') }}">My
+                                                Blogs</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <form method="POST" action="{{ route('logout') }}" id="logout-form">
+                                                @csrf
+                                                <a class="nav-link" style="cursor: pointer" :href="route('logout')"
+                                                    onclick="event.preventDefault();
+                                                        this.closest('form#logout-form').submit();">
+                                                    {{ __('Log Out') }}
+                                                </a>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
 
 
-                            <!-- <li class="nav-item submenu dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-              aria-expanded="false">Welcome User</a>
-            <ul class="dropdown-menu">
-              <li class="nav-item"><a class="nav-link" href="blog-details.html">My Blogs</a></li>
-            </ul>
-          </li> -->
+
                         </ul>
                     </div>
                 </div>

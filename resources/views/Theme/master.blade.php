@@ -6,7 +6,6 @@
     @include('Theme.partials.header')
 
 
-
     @yield('content')
 
 

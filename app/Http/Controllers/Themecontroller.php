@@ -2,17 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class Themecontroller extends Controller
 {
     public function index()
     {
-        return view('Theme.index');
+        $blogs = Blog::paginate(4);
+        return view('Theme.index', compact('blogs'));
     }
-    public function category()
+    public function category($id)
     {
-        return view('Theme.category');
+        $category = Category::find($id);
+        if (!$category) {
+            return back();
+        }
+
+        $categoryName = $category->name;
+
+        // $category_id=Category::where('name',$name)->first()->id;                  
+        $blogs = Blog::where('category_id', $id)->paginate(8);
+
+        return view('Theme.category', compact('blogs', 'categoryName'));
     }
 
     public function contact()
@@ -20,9 +33,10 @@ class Themecontroller extends Controller
         return view('Theme.contact');
     }
 
-    public function blog()
+    public function blog($id)
     {
-        return view('Theme.blog');
+        $blog = Blog::where('id', $id)->first();
+        return view('Theme.blog', compact('blog'));
     }
     public function login()
     {
